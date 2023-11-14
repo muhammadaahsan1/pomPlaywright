@@ -12,8 +12,6 @@ export class TestRedirection {
     }
 
     async moveToAdminPage (){
-
-
         await this.locatingAdminPage.click()
        //The above line of code is equivalent of the following
        // await this.page.getByText('Admin').click();
