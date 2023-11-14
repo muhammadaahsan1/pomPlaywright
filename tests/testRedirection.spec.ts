@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import {LoginPage} from '../pageObjects/login.ts'
-import { TestRedirection } from '../pageObjects/testRedirection.ts';
+import { TestRedirection } from '../pageObjects/redirectPages.ts';
 
 test('test for safe landing on site', async ({ page }) => {
   await page.goto('https://opensource-demo.orangehrmlive.com/');
@@ -21,6 +21,7 @@ test('test redirection to pages in orangeHRM', async ({ page }) => {
     await redirection.moveToPimPage();
     await redirection.moveToTimePage();
     await redirection.moveToRecruitmentPage();
+    await redirection.moveToLeavePage();
     
 
     

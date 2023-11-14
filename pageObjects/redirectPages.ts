@@ -1,16 +1,22 @@
-import { Page, expect } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 
 
 export class TestRedirection {
     readonly page: Page;
+    readonly locatingAdminPage: Locator
     
     constructor(page: Page) {
         this.page =page;
+        //Only define most repeatable locators, otherwise it will be a mess
+        this.locatingAdminPage = page.getByText('Admin')
     }
 
     async moveToAdminPage (){
 
-        await this.page.getByText('Admin').click();
+
+        await this.locatingAdminPage.click()
+       //The above line of code is equivalent of the following
+       // await this.page.getByText('Admin').click();
         await expect(this.page.getByRole('heading', { name: 'System Users' })).toBeVisible();
     }
 
@@ -26,21 +32,18 @@ export class TestRedirection {
         await expect(this.page.getByRole('heading', { name: 'Leave List'})).toBeVisible();
     }
 
-    async moveToTimePage (){
+    async moveToRecruitmentPage (){
 
         await this.page.getByText('Recruitment').click();
         await expect(this.page.getByRole('heading', { name: 'Candidates'})).toBeVisible();
     }
 
 
-    async moveToRecruitmentPage (){
+    async moveToTimePage (){
 
-        await this.page.getByText('Leave').click();
+        await this.page.getByText('Time').click();
         await expect(this.page.getByRole('heading', { name: 'Select Employee'})).toBeVisible();
     }
-
-    
-
 
 
 
