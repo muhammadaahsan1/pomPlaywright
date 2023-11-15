@@ -1,55 +1,25 @@
 import { Locator, Page, expect } from "@playwright/test";
 
 
-export class TestRedirection {
+export class FillFormsonOrange {
     readonly page: Page;
-    readonly locatingAdminPage: Locator
+    readonly personalPage: Locator
     
     constructor(page: Page) {
         this.page =page;
         //Only define most repeatable locators, otherwise it will be a mess
-        this.locatingAdminPage = page.getByText('Admin')
+        this.personalPage = page.locator('.orangehrm-edit-employee-content',{hasText:'Personal Details'});
+
     }
 
-    async moveToAdminPage (){
-        await this.locatingAdminPage.click()
-       //The above line of code is equivalent of the following
-       // await this.page.getByText('Admin').click();
-        await expect(this.page.getByRole('heading', { name: 'System Users' })).toBeVisible();
+    async fillDetailsOnMyInfoPage (name:string, lastName:string, id:string, date:string){
+        
+            await this.page.getByText('My Info').click();
+            await expect(this.page.getByRole('heading', { name: 'Personal Details'})).toBeVisible();
+            await this.personalPage.getByPlaceholder('First Name').fill(name);
+            await this.personalPage.getByPlaceholder('Last Name').fill('Champ');
+            await this.page.locator("(//input[@class='oxd-input oxd-input--active'])[3]").fill(id);
+            await this.personalPage.getByPlaceholder("yyyy-mm-dd").last().fill(date); 
+        }
     }
 
-    async moveToPimPage (){
-
-        await this.page.getByText('PIM').click();
-        await expect(this.page.getByRole('heading', { name: 'Employee Information' })).toBeVisible();
-    }
-
-    async moveToLeavePage (){
-
-        await this.page.getByText('Leave').click();
-        await expect(this.page.getByRole('heading', { name: 'Leave List'})).toBeVisible();
-    }
-
-    async moveToRecruitmentPage (){
-
-        await this.page.getByText('Recruitment').click();
-        await expect(this.page.getByRole('heading', { name: 'Candidates'})).toBeVisible();
-    }
-
-
-    async moveToTimePage (){
-
-        await this.page.getByText('Time').click();
-        await expect(this.page.getByRole('heading', { name: 'Select Employee'})).toBeVisible();
-    }
-
-    async moveToMyInfoPage (){
-        await this.page.getByText('My Info').click();
-        await expect(this.page.getByRole('heading', { name: 'Personal Details'})).toBeVisible();
-    }
-
-
-
-}
-
-    

@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import {LoginPage} from '../pageObjects/login.ts'
 import { TestRedirection } from '../pageObjects/redirectPages.ts';
+import { FillFormsonOrange } from '../pageObjects/fillForms.ts';
 
 test('test for safe landing on site', async ({ page }) => {
   await page.goto('https://opensource-demo.orangehrmlive.com/');
@@ -17,6 +18,9 @@ test('test Forms using Parameterization', async ({ page }) => {
     //Finding any user
     const redirection = new TestRedirection(page);
     await redirection.moveToMyInfoPage();
+
+    const fillForms = new FillFormsonOrange(page);
+    await fillForms.fillDetailsOnMyInfoPage('playwright', 'champ', '77', '2023-11-11');
     
 
   

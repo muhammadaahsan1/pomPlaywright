@@ -17,6 +17,7 @@ test('test redirection to pages in orangeHRM', async ({ page }) => {
     await login.loginToOrange();
     //Finding any user
     const redirection = new TestRedirection(page);
+    await redirection.moveToMyInfoPage();
     await redirection.moveToAdminPage();
     await redirection.moveToPimPage();
     await redirection.moveToTimePage();
