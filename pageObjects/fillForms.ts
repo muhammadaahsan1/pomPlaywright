@@ -12,14 +12,19 @@ export class FillFormsonOrange {
 
     }
 
-    async fillDetailsOnMyInfoPage (name:string, lastName:string, id:string, date:string){
+    async fillDetailsOnMyInfoPage (name:string, lastName:string, id:number, date:string){
         
             await this.page.getByText('My Info').click();
             await expect(this.page.getByRole('heading', { name: 'Personal Details'})).toBeVisible();
             await this.personalPage.getByPlaceholder('First Name').fill(name);
             await this.personalPage.getByPlaceholder('Last Name').fill('Champ');
-            await this.page.locator("(//input[@class='oxd-input oxd-input--active'])[3]").fill(id);
-            await this.personalPage.getByPlaceholder("yyyy-mm-dd").last().fill(date); 
+            await this.page.locator("(//input[@class='oxd-input oxd-input--active'])[3]").fill(Number(id).toString());
+            await this.personalPage.getByPlaceholder("yyyy-mm-dd").first().fill(date); 
+            await this.page.waitForTimeout(1000)
+
+            
+
+    
         }
     }
 
