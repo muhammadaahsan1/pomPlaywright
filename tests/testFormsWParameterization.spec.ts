@@ -22,7 +22,7 @@ test('test Forms using Parameterization', async ({ page }) => {
     await redirection.moveToMyInfoPage();
     const currentDate = new Date().toJSON().slice(0, 10); //toJSON() method, which returns our date in the yyyy-mm-dd format in addition to the time format, hh:mm:ss.ms.
     console.log(currentDate); // "2022-06-17"
-    await fillForms.fillDetailsOnMyInfoPage('playwright', 'champ', 77, currentDate);
+    await fillForms.fillDetailsOnMyInfoPage('playwright', 'champ', 77, currentDate, true);
 
     //Test Admin Form
     await redirection.moveToAdminPage();

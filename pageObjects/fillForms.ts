@@ -11,8 +11,15 @@ export class FillFormsonOrange {
         this.personalPage = page.locator('.orangehrm-edit-employee-content',{hasText:'Personal Details'});
 
     }
-
-    async fillDetailsOnMyInfoPage (name:string, lastName:string, id:number, date:string){
+    /**
+     * 
+     * @param name 
+     * @param lastName 
+     * @param id 
+     * @param date 
+     * @param smoker 
+     */
+    async fillDetailsOnMyInfoPage (name:string, lastName:string, id:number, date:string, smoker:boolean){
         
             await this.page.getByText('My Info').click();
             await expect(this.page.getByRole('heading', { name: 'Personal Details'})).toBeVisible();
@@ -20,6 +27,9 @@ export class FillFormsonOrange {
             await this.personalPage.getByPlaceholder('Last Name').fill('Champ');
             await this.page.locator("(//input[@class='oxd-input oxd-input--active'])[3]").fill(Number(id).toString());
             await this.personalPage.getByPlaceholder("yyyy-mm-dd").first().fill(date); 
+            if(smoker){
+                await this.personalPage.getByRole('checkbox').first().check({force:true})
+            }
             await this.page.waitForTimeout(1000)
 
             
