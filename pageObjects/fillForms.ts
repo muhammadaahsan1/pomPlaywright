@@ -13,11 +13,11 @@ export class FillFormsonOrange {
     }
     /**
      * 
-     * @param name 
-     * @param lastName 
-     * @param id 
-     * @param date 
-     * @param smoker 
+     * @param name - first name on personal info page on orange hrm
+     * @param lastName - last name
+     * @param id - employee id
+     * @param date - expiry date of the employee card
+     * @param smoker - boolean value whether employee is a smoker or not
      */
     async fillDetailsOnMyInfoPage (name:string, lastName:string, id:number, date:string, smoker:boolean){
         
@@ -31,10 +31,6 @@ export class FillFormsonOrange {
                 await this.personalPage.getByRole('checkbox').first().check({force:true})
             }
             await this.page.waitForTimeout(1000)
-
-            
-
-    
         }
     }
 
